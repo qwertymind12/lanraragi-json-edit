@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <link rel="stylesheet" type="text/css" href="index.css"/>
+	  <title>LANraragi JSON Editor</title>
+	  <meta charset="UTF-8">
+	</head>
+	<body>
+		<main>
+			<div class="column left">
+				<div class="import-buttons">
+					<input id="file-input" class="hidden" type="file" accept=".json"/>
+					<button id="import-btn">Import JSON</button>
+					<button id="export-btn">Export JSON</button>
+				</div>
+				<div class="list-header">
+					<input type="search" id="list-search" class="search" placeholder="Search..."/>
+					<input type="checkbox" id="empty-filter"/>
+					<label for="empty-filter">Empty tags</label>
+				</div>
+				<select id="title-select" class="flex-1" size="30"></select>
+			</div>
+			<div class="column right">
+				<label for="archive-file">Filename:</label>
+				<textarea id="archive-file" class="flex-0" rows="2"></textarea>
+				<label for="archive-title">Title:</label>
+				<textarea id="archive-title" class="flex-0" rows="2"></textarea>
+				<label for="archive-tags">Tags:</label>
+				<textarea id="archive-tags" class="flex-1" rows="20"></textarea>
+				<div class="archive-buttons">
+					<button id="apply-btn">Apply changes</button>
+				</div>
+			</div>
+		</main>
+		<script src="index.js"></script>
+	</body>
+</html>
