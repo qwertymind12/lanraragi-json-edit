@@ -5,6 +5,7 @@ const exportBtn = document.getElementById('export-btn');
 const fileInput = document.getElementById('file-input');
 const listSearch = document.getElementById('list-search');
 const emptyFilter = document.getElementById('empty-filter');
+const sortingFilter = document.getElementById('sorting-filter');
 const titleSelect = document.getElementById('title-select');
 
 
@@ -29,6 +30,7 @@ exportBtn.onclick = () => exportJson();
 fileInput.onchange = () => importJson(fileInput.files);
 listSearch.onchange = () => filterArchivesList();
 emptyFilter.onchange = () => filterArchivesList();
+sortingFilter.onchange = () => filterArchivesList();
 titleSelect.onchange = () => setCurrentArchive(titleSelect.selectedOptions?.[0].value);
 applyBtn.onclick = () => applyCurrentFormData();
 
@@ -60,7 +62,7 @@ const processJson = (json) => {
 	}
 	clearInputs();
 	currentDatabase = json;
-	updateArchivesList(archives);
+	filterArchivesList();
 };
 
 const exportJson = () => {
@@ -80,10 +82,16 @@ const filterArchivesList = () => {
 	if (!currentDatabase?.archives) {
 		return;
 	}
-	const filteredList = currentDatabase.archives.filter((item) => (
+	const searchValue = listSearch.value.toLowerCase();
+	let filteredList = currentDatabase.archives.filter((item) => (
 		(!emptyFilter.checked || !item.tags) &&
-		(!listSearch.value || item.filename.toLowerCase().includes(listSearch.value.toLowerCase()))
+		(!searchValue || item.filename.toLowerCase().includes(searchValue))
 	));
+	if (sortingFilter.checked) {
+		filteredList = filteredList.sort((a, b) => (
+			a.filename.toLowerCase().localeCompare(b.filename.toLowerCase())
+		));
+	}
 	updateArchivesList(filteredList);
 };
 

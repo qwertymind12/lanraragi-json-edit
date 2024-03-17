@@ -58,7 +58,10 @@ main {
 
 .list-header .search {
 	flex-grow: 1;
-	margin-right: 12px;
+}
+
+.list-header input[type='checkbox'] {
+	margin-left: 12px;
 }
 
 
